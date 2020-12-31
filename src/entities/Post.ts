@@ -9,7 +9,7 @@ export class Post {
     @Property({ type: "date" })
     createdAt = new Date();
 
-    @Property({ onUpdate: () => new Date() })
+    @Property({ type: "date", onUpdate: () => new Date() })
     updatedAt = new Date();
 
     @Property({ type: "text" })

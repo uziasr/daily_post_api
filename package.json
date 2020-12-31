@@ -23,7 +23,11 @@
     "@mikro-orm/core": "^4.3.4",
     "@mikro-orm/migrations": "^4.3.4",
     "@mikro-orm/postgresql": "^4.3.4",
-    "pq": "^0.0.3"
+    "apollo-server-express": "^2.19.1",
+    "express": "^4.17.1",
+    "graphql": "^15.4.0",
+    "pq": "^0.0.3",
+    "type-graphql": "^1.1.1"
   },
   "mikro-orm": {
     "useTsNode": true,
