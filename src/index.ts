@@ -7,6 +7,7 @@ import { ApolloServer } from "apollo-server-express"
 import { buildSchema } from "type-graphql"
 import { HelloResolver } from "./resolvers/hello"
 import { PostResolver } from "./resolvers/post"
+import { UserResolver } from "./resolvers/user"
 
 
 const main = async () => {
@@ -21,7 +22,7 @@ const main = async () => {
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
             validate: false,
-            resolvers: [HelloResolver, PostResolver]
+            resolvers: [HelloResolver, PostResolver, UserResolver]
         }),
         context: (() => ({ em: orm.em })) // a function that returns the object for the context
         // allows tables / classes to be accessed by graphql 

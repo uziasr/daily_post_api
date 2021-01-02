@@ -25,8 +25,8 @@ export class PostResolver {
     }
     @Mutation(() => Post)
     async updatePost(
-        @Arg("id", () => Int) id: number
-        @Arg("title", () => String, { nullable: true }) title: string
+        @Arg("id", () => Int) id: number,
+        @Arg("title", () => String, { nullable: true }) title: string,
         @Ctx() { em }: MyContext
     ): Promise<Post | null> {
         const post = await em.findOne(Post, { id })
@@ -39,6 +39,7 @@ export class PostResolver {
         }
         return post;
     }
+     
     @Mutation(() => Boolean)
     async deletePost(
         @Arg("id") id: number,
