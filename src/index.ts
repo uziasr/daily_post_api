@@ -1,6 +1,6 @@
 import "reflect-metadata"
 import { MikroORM } from "@mikro-orm/core"
-import { __prod__ } from "./constants"
+import { __prod__, COOKIE_NAME } from "./constants"
 import microConfig from "./mikro-orm.config"
 import express from "express"
 import { ApolloServer } from "apollo-server-express"
@@ -8,17 +8,22 @@ import { buildSchema } from "type-graphql"
 import { HelloResolver } from "./resolvers/hello"
 import { PostResolver } from "./resolvers/post"
 import { UserResolver } from "./resolvers/user"
-import redis from "redis"
+import Redis from "ioredis"
 import session from "express-session"
 import connectRedis from "connect-redis"
-import { MyContext } from "./types"
+// import { MyContext } from "./types"
+import cors from "cors"
+import { sendEmail } from "./utils/sendEmail"
+import { User } from "./entities/User"
 
 
 
 
 const main = async () => {
+    // sendEmail('bob@bob.com', 'hello there')
     const orm = await MikroORM.init(microConfig)
-    // await orm.getMigrator().up()
+    // await orm.em.nativeDelete(User, {})
+    await orm.getMigrator().up()
     // const post = orm.em.create(Post, { title: "my first post" })
     // await orm.em.persistAndFlush(post)
 
@@ -29,13 +34,17 @@ const main = async () => {
 
     const app = express()
     const RedisStore = connectRedis(session)
-    const redisClient = redis.createClient()
+    const redis = new Redis()
 
+    app.use(cors({
+        origin: "http://localhost:3000",
+        credentials: true
+    }))
     app.use(
         session({
-            name: 'qid',
+            name: COOKIE_NAME,
             store: new RedisStore({
-                client: redisClient,
+                client: redis,
                 disableTouch: true
             }),
             cookie: {
@@ -54,17 +63,17 @@ const main = async () => {
             validate: false,
             resolvers: [HelloResolver, PostResolver, UserResolver]
         }),
-        context: (({ req, res }): MyContext => ({ em: orm.em, req, res })) // a function that returns the object for the context
+        context: (({ req, res }) => ({ em: orm.em, req, res, redis })) // a function that returns the object for the context
         // allows tables / classes to be accessed by graphql 
     })
 
-    apolloServer.applyMiddleware({ app }) // creates graphql endpoint on express
-
+    apolloServer.applyMiddleware({ app, cors: false }) // creates graphql endpoint on express
     app.get("/", (_, res) => {
         res.send("hello")
     })
-    app.listen("8000", () => {
-        console.log("Hello there")
+    const port = 9000
+    app.listen(port, () => {
+        console.log("Hello there", port)
     })
 }
 

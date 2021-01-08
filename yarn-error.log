@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add -D @types/connect-session
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add -D @type/cors
 
 PATH: 
-  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\uzias\bin;C:\Program Files\Java\jdk-14.0.1\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Program Files\Microsoft SQL Server\120\DTS\Binn;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn;C:\Program Files (x86)\Common Files\Adobe\AGL;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\PuTTY;C:\Program Files\Git\cmd;C:\Program Files\PostgreSQL\11\bin;C:\Program Files\PostgreSQL\11\lib;C:\Program Files\IBM\SPSS\Statistics\25\JRE\bin;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin;%JAVA_HOME%\bin;C:\Users\uzias\AppData\Local\Programs\Python\Python37-32\Scripts;C:\Users\uzias\AppData\Local\Programs\Python\Python37-32;C:\Users\uzias\AppData\Local\Programs\Python\Python38\Scripts;C:\Users\uzias\AppData\Local\Programs\Python\Python38;C:\Users\uzias\AppData\Local\Microsoft\WindowsApps;C:\Users\uzias\AppData\Local\atom\bin;C:\Users\uzias\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\uzias\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin;C:\Program Files\nodejs;C:\Users\uzias\AppData\Roaming\npm;C:\Users\uzias\AppData\Local\Microsoft\WindowsApps;C:\Users\uzias\AppData\Local\Yarn\bin;C:\Users\uzias\AppData\Local\pip\Cache\wheels\6e\e8\db\c73dae4867666e89ba3cfbc4b5c092446f0e584eda6f409cbb;C:\Users\uzias\AppData\Roaming\Python\Python37\Scripts;C:\Program Files\JetBrains\PyCharm 2019.3.3\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.2\bin
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\uzias\bin;C:\Users\uzias\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\uzias\bin;C:\Program Files\Java\jdk-14.0.1\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Program Files\Microsoft SQL Server\120\DTS\Binn;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn;C:\Program Files (x86)\Common Files\Adobe\AGL;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\PuTTY;C:\Program Files\Git\cmd;C:\Program Files\PostgreSQL\11\bin;C:\Program Files\PostgreSQL\11\lib;C:\Program Files\IBM\SPSS\Statistics\25\JRE\bin;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin;%JAVA_HOME%\bin;C:\Users\uzias\AppData\Local\Programs\Python\Python37-32\Scripts;C:\Users\uzias\AppData\Local\Programs\Python\Python37-32;C:\Users\uzias\AppData\Local\Programs\Python\Python38\Scripts;C:\Users\uzias\AppData\Local\Programs\Python\Python38;C:\Users\uzias\AppData\Local\Microsoft\WindowsApps;C:\Users\uzias\AppData\Local\atom\bin;C:\Users\uzias\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\uzias\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin;C:\Program Files\nodejs;C:\Users\uzias\AppData\Roaming\npm;C:\Users\uzias\AppData\Local\Microsoft\WindowsApps;C:\Users\uzias\AppData\Local\Yarn\bin;C:\Users\uzias\AppData\Local\pip\Cache\wheels\6e\e8\db\c73dae4867666e89ba3cfbc4b5c092446f0e584eda6f409cbb;C:\Users\uzias\AppData\Roaming\Python\Python37\Scripts;C:\Program Files\JetBrains\PyCharm 2019.3.3\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.2\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
 
 Yarn version: 
   1.17.3
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fconnect-session: Not found
+  Error: https://registry.yarnpkg.com/@type%2fcors: Not found
       at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:65939:18)
       at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140464:22)
       at Request.emit (events.js:198:13)
@@ -43,6 +43,8 @@ npm manifest:
     "author": "",
     "license": "ISC",
     "devDependencies": {
+      "@types/connect-redis": "^0.0.16",
+      "@types/express-session": "^1.17.3",
       "@types/node": "^14.14.16",
       "@types/redis": "^2.8.28",
       "nodemon": "^2.0.6",
@@ -57,6 +59,7 @@ npm manifest:
       "apollo-server-express": "^2.19.1",
       "argon2": "^0.27.1",
       "connect-redis": "^5.0.0",
+      "cors": "^2.8.5",
       "express": "^4.17.1",
       "express-session": "^1.17.1",
       "graphql": "^15.4.0",
@@ -297,6 +300,16 @@ Lockfile:
     dependencies:
       "@types/node" "*"
   
+  "@types/connect-redis@^0.0.16":
+    version "0.0.16"
+    resolved "https://registry.yarnpkg.com/@types/connect-redis/-/connect-redis-0.0.16.tgz#fd98a26ffbe6ac3037baa4aecc940951b9f78cdc"
+    integrity sha512-ToZRmwoeqRhzGIqMO9k8Hs1B9pFSGYCjHvMpPlgo+kQ4M7xaPwi2/5HjikJ0MOfPDFcAe9Qwl1SaULYCNE6jYg==
+    dependencies:
+      "@types/express" "*"
+      "@types/express-session" "*"
+      "@types/ioredis" "*"
+      "@types/redis" "*"
+  
   "@types/connect@*":
     version "3.4.34"
     resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.34.tgz#170a40223a6d666006d93ca128af2beb1d9b1901"
@@ -341,6 +354,13 @@ Lockfile:
       "@types/node" "*"
       "@types/qs" "*"
       "@types/range-parser" "*"
+  
+  "@types/express-session@*", "@types/express-session@^1.17.3":
+    version "1.17.3"
+    resolved "https://registry.yarnpkg.com/@types/express-session/-/express-session-1.17.3.tgz#4a37c5c4428b8f922ac8ac1cb4bd9190a4d2b097"
+    integrity sha512-57DnyxiqClXOIjoCgeKCUYfKxBPOlOY/k+l1TPK+7bSwyiPTrS5FIk1Ycql7twk4wO7P5lfOVy6akDGiaMSLfw==
+    dependencies:
+      "@types/express" "*"
   
   "@types/express@*":
     version "4.17.9"
@@ -396,6 +416,13 @@ Lockfile:
     version "1.8.0"
     resolved "https://registry.yarnpkg.com/@types/http-errors/-/http-errors-1.8.0.tgz#682477dbbbd07cd032731cb3b0e7eaee3d026b69"
     integrity sha512-2aoSC4UUbHDj2uCsCxcG/vRMXey/m17bC7UwitVm5hn22nI8O8Y9iDpA76Orc+DWkQ4zZrOKEshCqR/jSuXAHA==
+  
+  "@types/ioredis@*":
+    version "4.17.10"
+    resolved "https://registry.yarnpkg.com/@types/ioredis/-/ioredis-4.17.10.tgz#63a99d9655b4f41682e627812ac1cbb2c0668ffa"
+    integrity sha512-1K6BE5oAuu+j8g0mMGDxFvEpbveI3w6aGtcaG3MgszofIGb5ms5xx7m+pgKiXb80c9kuwIaJMiNEeVOWZV3UiQ==
+    dependencies:
+      "@types/node" "*"
   
   "@types/json5@^0.0.29":
     version "0.0.29"
@@ -489,7 +516,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
     integrity sha512-ewFXqrQHlFsgc09MK5jP5iR7vumV/BYayNC6PgJO2LPe8vrnNFyjQjSppfEngITi0qvfKtzFvgKymGheFM9UOA==
   
-  "@types/redis@^2.8.28":
+  "@types/redis@*", "@types/redis@^2.8.28":
     version "2.8.28"
     resolved "https://registry.yarnpkg.com/@types/redis/-/redis-2.8.28.tgz#5862b2b64aa7f7cbc76dafd7e6f06992b52c55e3"
     integrity sha512-8l2gr2OQ969ypa7hFOeKqtFoY70XkHxISV0pAwmQ2nm6CSPb1brmTmqJCGGrekCo+pAZyWlNXr+Kvo6L/1wijA==
@@ -1244,7 +1271,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
     integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
   
-  cors@^2.8.4:
+  cors@^2.8.4, cors@^2.8.5:
     version "2.8.5"
     resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.5.tgz#eac11da51592dd86b9f06f6e7ac293b3df875d29"
     integrity sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==
