@@ -1,7 +1,5 @@
 import "reflect-metadata"
-import { MikroORM } from "@mikro-orm/core"
 import { __prod__, COOKIE_NAME } from "./constants"
-import microConfig from "./mikro-orm.config"
 import express from "express"
 import { ApolloServer } from "apollo-server-express"
 import { buildSchema } from "type-graphql"
@@ -11,25 +9,23 @@ import { UserResolver } from "./resolvers/user"
 import Redis from "ioredis"
 import session from "express-session"
 import connectRedis from "connect-redis"
-// import { MyContext } from "./types"
 import cors from "cors"
-import { sendEmail } from "./utils/sendEmail"
+import { createConnection } from "typeorm"
+import { Post } from "./entities/Post"
 import { User } from "./entities/User"
 
 
-
-
 const main = async () => {
-    // sendEmail('bob@bob.com', 'hello there')
-    const orm = await MikroORM.init(microConfig)
-    // await orm.em.nativeDelete(User, {})
-    await orm.getMigrator().up()
-    // const post = orm.em.create(Post, { title: "my first post" })
-    // await orm.em.persistAndFlush(post)
-
-    // const posts = await orm.em.find(Post, {})
-    // console.log(posts)
-
+    const conn = await createConnection({
+        type: 'postgres',
+        database: 'lireddit2',
+        username: 'postgres',
+        password: '1234',
+        logging: true,
+        synchronize: true,
+        port: 5433,
+        entities: [Post, User]
+    })
 
 
     const app = express()
@@ -63,7 +59,7 @@ const main = async () => {
             validate: false,
             resolvers: [HelloResolver, PostResolver, UserResolver]
         }),
-        context: (({ req, res }) => ({ em: orm.em, req, res, redis })) // a function that returns the object for the context
+        context: (({ req, res }) => ({ req, res, redis })) // a function that returns the object for the context
         // allows tables / classes to be accessed by graphql 
     })
 
