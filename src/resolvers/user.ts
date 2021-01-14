@@ -137,7 +137,7 @@ export class UserResolver {
     async login(
         @Arg('usernameOrEmail') usernameOrEmail: string,
         @Arg('password') password: string,
-        @Ctx() { req, redis }: MyContext
+        @Ctx() { req }: MyContext
     ): Promise<UserResponse> {
 
         const user = await User.findOne({ where: usernameOrEmail.includes('@') ? { email: usernameOrEmail } : { username: usernameOrEmail } })
