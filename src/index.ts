@@ -54,7 +54,7 @@ const main = async () => {
                 httpOnly: true,
                 sameSite: "lax",
                 secure: __prod__, //cookie only works in https
-                // domain: __prod__ ? ".codeponder.com" : undefined,
+                domain: __prod__ ? ".daily-post-web.vercel.app" : undefined,
             },
             saveUninitialized: false,
             secret: process.env.SESSION_SECRET,
