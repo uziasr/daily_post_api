@@ -152,7 +152,7 @@ let UserResolver = class UserResolver {
             };
         });
     }
-    login(usernameOrEmail, password, { req }) {
+    login(usernameOrEmail, password, { req, redis }) {
         return __awaiter(this, void 0, void 0, function* () {
             const user = yield User_1.User.findOne({ where: usernameOrEmail.includes('@') ? { email: usernameOrEmail } : { username: usernameOrEmail } });
             if (!user) {
@@ -173,6 +173,7 @@ let UserResolver = class UserResolver {
                 };
             }
             req.session.userId = user.id;
+            console.log(req.session, redis);
             return {
                 user,
             };

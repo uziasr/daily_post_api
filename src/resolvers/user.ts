@@ -137,7 +137,7 @@ export class UserResolver {
     async login(
         @Arg('usernameOrEmail') usernameOrEmail: string,
         @Arg('password') password: string,
-        @Ctx() { req }: MyContext
+        @Ctx() { req, redis }: MyContext
     ): Promise<UserResponse> {
 
         const user = await User.findOne({ where: usernameOrEmail.includes('@') ? { email: usernameOrEmail } : { username: usernameOrEmail } })
@@ -159,6 +159,7 @@ export class UserResolver {
             }
         }
         req.session.userId = user.id
+        console.log(req.session, redis)
         return {
             user,
         }
