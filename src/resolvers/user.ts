@@ -1,4 +1,4 @@
-import { Resolver, Arg, Field, Mutation, Ctx, ObjectType, Query } from "type-graphql"
+import { Resolver, Arg, Field, Mutation, Ctx, ObjectType, Query, FieldResolver, Root } from "type-graphql"
 import { MyContext } from "../types"
 import { User } from "../entities/User"
 import argon2 from "argon2"
@@ -26,9 +26,17 @@ class UserResponse {
     user?: User
 }
 
-@Resolver()
+@Resolver(User)
 export class UserResolver {
-    // functions can be either be mutations or queries 
+    // functions can be either be mutations or queries
+    @FieldResolver(() => String)
+    email(@Root() user: User, @Ctx() {req}: MyContext){
+        if (req.session.userId === user.id){
+            return user.email
+        }
+        return ""
+    }
+
     @Mutation(() => UserResponse)
     async changePassword(
         @Arg('token') token: string,
@@ -107,7 +115,7 @@ export class UserResolver {
                 )
                 .returning('*')
                 .execute()
-                user = results.raw[0]
+            user = results.raw[0]
         }
         catch (e) {
             if (e.code === "2305" || e.detail.includes("already exists")) {

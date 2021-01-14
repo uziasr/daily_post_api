@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
+require("dotenv-safe/config");
 const constants_1 = require("./constants");
 const express_1 = __importDefault(require("express"));
 const apollo_server_express_1 = require("apollo-server-express");
@@ -27,22 +28,26 @@ const cors_1 = __importDefault(require("cors"));
 const typeorm_1 = require("typeorm");
 const Post_1 = require("./entities/Post");
 const User_1 = require("./entities/User");
+const path_1 = __importDefault(require("path"));
+const Updoot_1 = require("./entities/Updoot");
+const createUserLoader_1 = require("./utils/createUserLoader");
+const createUpdootLoader_1 = require("./utils/createUpdootLoader");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const conn = yield typeorm_1.createConnection({
         type: 'postgres',
-        database: 'lireddit2',
-        username: 'postgres',
-        password: '1234',
+        url: process.env.DATABASE_URL,
         logging: true,
-        synchronize: true,
         port: 5433,
-        entities: [Post_1.Post, User_1.User]
+        migrations: [path_1.default.join(__dirname, "./migrations/*")],
+        entities: [Post_1.Post, User_1.User, Updoot_1.Updoot],
     });
+    yield conn.runMigrations();
     const app = express_1.default();
     const RedisStore = connect_redis_1.default(express_session_1.default);
-    const redis = new ioredis_1.default();
+    const redis = new ioredis_1.default(process.env.REDIS_URL);
+    app.set("proxy", 1);
     app.use(cors_1.default({
-        origin: "http://localhost:3000",
+        origin: process.env.CORS_ORIGIN,
         credentials: true
     }));
     app.use(express_session_1.default({
@@ -55,10 +60,10 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
             httpOnly: true,
             sameSite: "lax",
-            secure: constants_1.__prod__
+            secure: constants_1.__prod__,
         },
         saveUninitialized: false,
-        secret: "hidethisasap",
+        secret: process.env.SESSION_SECRET,
         resave: false,
     }));
     const apolloServer = new apollo_server_express_1.ApolloServer({
@@ -66,14 +71,14 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             validate: false,
             resolvers: [hello_1.HelloResolver, post_1.PostResolver, user_1.UserResolver]
         }),
-        context: (({ req, res }) => ({ req, res, redis }))
+        context: (({ req, res }) => ({ req, res, redis, userLoader: createUserLoader_1.createUserLoader(), updootLoader: createUpdootLoader_1.createUpdootLoader() }))
     });
     apolloServer.applyMiddleware({ app, cors: false });
     app.get("/", (_, res) => {
         res.send("hello");
     });
-    const port = 9000;
-    app.listen(port, () => {
+    const port = process.env.PORT;
+    app.listen(port.toString(), () => {
         console.log("Hello there", port);
     });
 });
